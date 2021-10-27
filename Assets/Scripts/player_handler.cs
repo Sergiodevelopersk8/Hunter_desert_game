@@ -8,6 +8,7 @@ public class player_handler : MonoBehaviour
     /*clase 12 video 1*/
     Vector2 velocidad;
     bool is_grounded = true;
+    bool cooldown = true;
     public float vel_desp;
     public float vel_salto;
     public GameObject spr1;
@@ -17,6 +18,8 @@ public class player_handler : MonoBehaviour
     private Vector2 pos_max;
     enum estados { idle, walking, jump, dead }
     estados estado_actual = estados.idle;
+
+    bool[] teclas = { false,false,false,false }; //0 arriba, 1 abajo, 2 izquierda, 3 derecha
 
     void Start()
     {
@@ -38,7 +41,7 @@ public class player_handler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-
+            teclas[2] = true;
             estado_actual = estados.walking;
 
             velocidad.x = -vel_desp;
@@ -77,7 +80,8 @@ public class player_handler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            //velocidad.x = 0.5f;
+
+            teclas[3] = true;
             velocidad.x = vel_desp;
             if (spr1.GetComponent<SpriteRenderer>().flipX)
             {
@@ -119,12 +123,33 @@ public class player_handler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-
+            teclas[0] = true;
         }
 
        if (Input.GetKeyDown(KeyCode.S))
         {
+            teclas[1] = true;
 
+        }
+
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            teclas[2] = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            teclas[3] = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            teclas[0] = false;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            teclas[1] = false;
         }
 
         if (Input.GetKeyUp(KeyCode.C) && is_grounded)//salto
@@ -150,12 +175,15 @@ public class player_handler : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && cooldown)
         {
             GameObject newBala = Instantiate(bala, transform.position, Quaternion.identity);
+            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
+            cooldown = false;
+            Invoke("habilitar_cooldown", 0.5f);
         }
 
-
+        chechar_teclas();
 
     }
 
@@ -240,6 +268,61 @@ public class player_handler : MonoBehaviour
 
 
 
+    }
+
+
+    void habilitar_cooldown()
+    {
+        cooldown = true;
+        transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 0);
+
+    }
+
+    void chechar_teclas()
+    {
+        if (teclas[0])
+        {
+            if (teclas[2])
+            {
+                return; //apunta diagonal arriba izquierda
+            }
+
+            else if (teclas[3])
+            {
+                return; //apunta diagonal arriba derecha
+            }
+
+            else
+            {
+                return; //apunta arriba
+            }
+        }
+
+        else if (teclas[1]) //arriba
+        {
+            if (teclas[2]) //abajo
+            {
+                return;
+            }
+            else if (teclas[3])
+            {
+                return;
+            }
+
+            else
+            {
+                return;
+            }
+        }
+
+        else if (teclas[2]) //izquierda
+        {
+            return;
+        }
+        else if (teclas[3]) //derecha
+        {
+            return;
+        }
     }
 
 }
