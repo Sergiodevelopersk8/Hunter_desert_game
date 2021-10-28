@@ -126,9 +126,9 @@ public class player_handler : MonoBehaviour
             teclas[0] = true;
         }
 
-       if (Input.GetKeyDown(KeyCode.S))
+       if (Input.GetKeyDown(KeyCode.E))
         {
-            teclas[1] = true;
+            teclas[1] = true; Debug.Log("tecla s presionada" + teclas);
 
         }
 
@@ -147,9 +147,10 @@ public class player_handler : MonoBehaviour
         {
             teclas[0] = false;
         }
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             teclas[1] = false;
+            Debug.Log("tecla s soltada" + teclas);
         }
 
         if (Input.GetKeyUp(KeyCode.C) && is_grounded)//salto
@@ -178,12 +179,12 @@ public class player_handler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && cooldown)
         {
             GameObject newBala = Instantiate(bala, transform.position, Quaternion.identity);
-            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
             cooldown = false;
+            chechar_teclas();
             Invoke("habilitar_cooldown", 0.5f);
         }
 
-        chechar_teclas();
+        
 
     }
 
@@ -284,31 +285,34 @@ public class player_handler : MonoBehaviour
         {
             if (teclas[2])
             {
-                return; //apunta diagonal arriba izquierda
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 2);
+                //apunta diagonal arriba izquierda
             }
 
             else if (teclas[3])
             {
-                return; //apunta diagonal arriba derecha
+                //apunta diagonal arriba derecha
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 2);
             }
 
             else
             {
-                return; //apunta arriba
+                //apunta arriba
+                return;
             }
         }
 
-        else if (teclas[1]) //arriba
+        else if (teclas[1]) 
         {
-            if (teclas[2]) //abajo
+            if (teclas[2] ) //abajo
             {
-                return;
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 3);
             }
+             
             else if (teclas[3])
             {
-                return;
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 3);
             }
-
             else
             {
                 return;
@@ -317,11 +321,11 @@ public class player_handler : MonoBehaviour
 
         else if (teclas[2]) //izquierda
         {
-            return;
+            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
         }
         else if (teclas[3]) //derecha
         {
-            return;
+            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
         }
     }
 
