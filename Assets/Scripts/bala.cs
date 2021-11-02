@@ -20,7 +20,7 @@ public class bala : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+ 
     }
 
 
@@ -30,6 +30,13 @@ public class bala : MonoBehaviour
 
         GetComponent<Rigidbody2D>().position += velocidad * Time.deltaTime;
 
+    }
+
+
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 
 }

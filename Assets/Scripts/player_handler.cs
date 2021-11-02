@@ -298,7 +298,7 @@ public class player_handler : MonoBehaviour
             else
             {
                 //apunta arriba
-                return;
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 4);
             }
         }
 
@@ -315,7 +315,7 @@ public class player_handler : MonoBehaviour
             }
             else
             {
-                return;
+                transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 5);
             }
         }
 
@@ -327,6 +327,12 @@ public class player_handler : MonoBehaviour
         {
             transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
         }
+
+        else
+        {
+            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
+        }
+
     }
 
 }
