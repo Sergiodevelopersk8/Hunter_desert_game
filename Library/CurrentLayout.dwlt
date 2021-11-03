@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 277, y: 198}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 47
+  controlID: 55
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 509, y: 498}
   m_MaxSize: {x: 14004, y: 14048}
   vertical: 0
-  controlID: 14
+  controlID: 35
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 15
+  controlID: 36
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -303,9 +303,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 7c290000
       m_LastClickedID: 0
-      m_ExpandedIDs: 64e4ffffb4e9ffffe0edfffffaedffffb6f3ffffdefbffff4c2b0000
+      m_ExpandedIDs: defbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -483,14 +483,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Prefabs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\DrawH\Desktop\juego2d10c\hunter desert
+  m_LastProjectPath: C:\Users\DrawH\Desktop\game\Hunter_desert_game-main
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9a280000
-    m_LastClickedID: 10394
-    m_ExpandedIDs: 00000000ea2700007e2a0000d42a000000ca9a3b
+    m_SelectedIDs: a4280000
+    m_LastClickedID: 10404
+    m_ExpandedIDs: 00000000f0270000862a0000dc2a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -518,7 +518,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea2700007e2a0000d42a0000
+    m_ExpandedIDs: 00000000f0270000862a0000dc2a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300002e3e0000823300007a290000242f00007e290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -640,9 +640,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.098751, y: 1.8682915, z: -0.016088245}
+    m_Target: {x: 1.0976973, y: 1.8692313, z: -0.015980901}
     speed: 2
-    m_Value: {x: 1.098751, y: 1.8682915, z: -0.016088245}
+    m_Value: {x: 1.0976973, y: 1.8692313, z: -0.015980901}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -674,9 +674,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.8956422
+    m_Target: 1.8841494
     speed: 2
-    m_Value: 1.8956422
+    m_Value: 1.8841494
   m_Ortho:
     m_Target: 1
     speed: 2
