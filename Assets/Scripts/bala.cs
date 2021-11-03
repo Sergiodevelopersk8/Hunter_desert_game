@@ -13,7 +13,7 @@ public class bala : MonoBehaviour
     void Start()
     {
 
-        velocidad.x = vel_desp;
+      
 
     }
 
@@ -37,6 +37,19 @@ public class bala : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+  public  void asignar_velocidad(float angulo)
+    {
+        /*cos ang = ady / hipotenusa   a = h*cos 45 */
+        velocidad.x = vel_desp * Mathf.Cos(deg2rad(angulo)); /*Adyacente  = hipotenusa * Cos angulo  */
+        velocidad.y = vel_desp * Mathf.Sin(deg2rad(angulo));   /*Opuesto  = hipotenusa * Sin(seno) angulo  */
+    
+    }
+
+   public float deg2rad(float angulo)
+    {
+        return angulo * 3.14f /180.0f;
     }
 
 }

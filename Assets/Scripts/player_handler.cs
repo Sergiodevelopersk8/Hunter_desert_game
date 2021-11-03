@@ -14,12 +14,15 @@ public class player_handler : MonoBehaviour
     public GameObject spr1;
     public GameObject bala;
     public GameObject spr2;
+    public GameObject spawns;
     private Vector2 pos_min;
     private Vector2 pos_max;
     enum estados { idle, walking, jump, dead }
     estados estado_actual = estados.idle;
 
     bool[] teclas = { false,false,false,false }; //0 arriba, 1 abajo, 2 izquierda, 3 derecha
+    enum direcciones  {derecha, izquierda, arriba, abajo, derarr, derab, izqarr, izqab};
+    direcciones direccion = direcciones.derecha;
 
     void Start()
     {
@@ -178,7 +181,6 @@ public class player_handler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X) && cooldown)
         {
-            GameObject newBala = Instantiate(bala, transform.position, Quaternion.identity);
             cooldown = false;
             chechar_teclas();
             Invoke("habilitar_cooldown", 0.5f);
@@ -281,58 +283,150 @@ public class player_handler : MonoBehaviour
 
     void chechar_teclas()
     {
+        Vector3 posicion = new Vector3();
+
         if (teclas[0])
         {
             if (teclas[2])
             {
+                direccion = direcciones.izqarr;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 2);
                 //apunta diagonal arriba izquierda
+                posicion = spawns.transform.Find("Spawn_IARR ").transform.position;
             }
 
             else if (teclas[3])
             {
                 //apunta diagonal arriba derecha
+                direccion = direcciones.derarr;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 2);
+                posicion = spawns.transform.Find("Spawn_DARR").transform.position;
             }
 
             else
             {
                 //apunta arriba
+                direccion = direcciones.arriba;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 4);
+                posicion = spawns.transform.Find("Spawn_AR").transform.position;
             }
         }
 
         else if (teclas[1]) 
         {
-            if (teclas[2] ) //abajo
+            if (teclas[2] ) //izquierda abajo
             {
+                direccion = direcciones.izqab;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 3);
+                posicion = spawns.transform.Find("Spawn_IAB").transform.position;
             }
              
             else if (teclas[3])
             {
+                //derecha abajo
+                direccion = direcciones.derab;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 3);
+                posicion = spawns.transform.Find("Spawn_DAB").transform.position;
             }
             else
             {
+                //abajo
+                direccion = direcciones.abajo;
                 transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 5);
+                posicion = spawns.transform.Find("Spawn_AB").transform.position;
             }
         }
 
-        else if (teclas[2]) //izquierda
+        else if (teclas[2]) //izquierda 
         {
+            direccion = direcciones.izquierda;
             transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
+            posicion = spawns.transform.Find("Spawn_I").transform.position;
+          
         }
         else if (teclas[3]) //derecha
         {
+            direccion = direcciones.derecha;
             transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
+            posicion = spawns.transform.Find("Spawn_D").transform.position;
         }
 
         else
         {
             transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 1);
+            if (spr1.GetComponent<SpriteRenderer>().flipX)
+            {
+                posicion = spawns.transform.Find("Spawn_I").transform.position;
+                direccion = direcciones.izquierda;
+            }
+            else
+            {
+                posicion = spawns.transform.Find("Spawn_D").transform.position;
+                direccion = direcciones.derecha;
+            }
         }
 
+        check_direccion(posicion);
+
+       
+        //newBala.GetComponent<bala>().asignar_velocida_diagonal(false);
+    }
+
+    public void check_direccion(Vector3 posicion)
+    {
+       
+        GameObject newBala = Instantiate(bala, posicion, Quaternion.identity);
+
+        switch (direccion)
+        {
+            case direcciones.derecha:
+
+                newBala.GetComponent<bala>().asignar_velocidad(0);
+                break;
+
+            case direcciones.izquierda:
+                newBala.GetComponent<bala>().asignar_velocidad(180);
+
+                break;
+
+            case direcciones.arriba:
+                newBala.GetComponent<bala>().asignar_velocidad(90);
+
+                break;
+
+
+            case direcciones.abajo:
+                newBala.GetComponent<bala>().asignar_velocidad(270);
+
+                break;
+
+
+            case direcciones.derab:
+                newBala.GetComponent<bala>().asignar_velocidad(315);
+
+                break;
+
+
+            case direcciones.derarr:
+                newBala.GetComponent<bala>().asignar_velocidad(45);
+
+                break;
+
+
+            case direcciones.izqab:
+                newBala.GetComponent<bala>().asignar_velocidad(225);
+
+                break;
+
+
+            case direcciones.izqarr:
+                newBala.GetComponent<bala>().asignar_velocidad(135);
+
+                break;
+
+
+
+        }
     }
 
 }
