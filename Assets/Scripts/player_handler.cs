@@ -6,8 +6,10 @@ public class player_handler : MonoBehaviour
 {
     // Start is called before the first frame update
     /*clase 12 video 1*/
+
     Vector2 velocidad;
-    bool is_grounded = true;
+    bool is_grounded = false;
+    bool plataforma = false;
     bool cooldown = true;
     public float vel_desp;
     public float vel_salto;
@@ -27,10 +29,13 @@ public class player_handler : MonoBehaviour
     void Start()
     {
 
+
+
         pos_min = GameObject.Find("min").transform.position;
         pos_max = GameObject.Find("max").transform.position;
 
-      
+        GetComponent<Animator>().SetInteger("estado", 2);
+        spr2.transform.position += new Vector3(-0.09f, 0, 0);
 
 
     }
@@ -39,16 +44,20 @@ public class player_handler : MonoBehaviour
     void Update()
     {
 
+        if (estado_actual != estados.dead) 
+        { 
+
+
         Vector3 posicion = transform.position;
         /*creamos una variable para copiar la posicion del transform provisoriamente */
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && GetComponent<Animator>().GetInteger("estado") != 3)
         {
             teclas[2] = true;
             estado_actual = estados.walking;
 
             velocidad.x = -vel_desp;
-            if (!spr1.GetComponent<SpriteRenderer>().flipX ) 
+            if (!spr1.GetComponent<SpriteRenderer>().flipX)
             {
                 spr1.GetComponent<SpriteRenderer>().flipX = true;
                 spr2.GetComponent<SpriteRenderer>().flipX = true;
@@ -81,7 +90,7 @@ public class player_handler : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && GetComponent<Animator>().GetInteger("estado") != 3)
         {
 
             teclas[3] = true;
@@ -103,7 +112,7 @@ public class player_handler : MonoBehaviour
                 }
             }
 
-            if(is_grounded)
+            if (is_grounded)
             {
                 GetComponent<Animator>().SetInteger("estado", 1);//cambio estado uno animacion walk
 
@@ -124,12 +133,27 @@ public class player_handler : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.S) && is_grounded)
+        {
+            GetComponent<Animator>().SetInteger("estado", 3);
+            spr2.transform.position += new Vector3(0, 0.0911f, 0);
+            transform.position += new Vector3(0, -0.14f, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.S) && GetComponent<Animator>().GetInteger("estado") == 3)
+        {
+            GetComponent<Animator>().SetInteger("estado", 0);
+            spr2.transform.position += new Vector3(0, -0.0911f, 0);
+            transform.position += new Vector3(0, 0.14f, 0);
+
+        }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             teclas[0] = true;
         }
 
-       if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             teclas[1] = true; Debug.Log("tecla s presionada" + teclas);
 
@@ -158,24 +182,47 @@ public class player_handler : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.C) && is_grounded)//salto
         {
-            GetComponent<Animator>().SetInteger("estado", 2);//cambio estado uno animacion walk
-
-            velocidad.y += vel_salto;
-            is_grounded = false;
-
-
-            if(!spr1.GetComponent<SpriteRenderer>().flipX)//si esta mirando a la derecha
+            if (GetComponent<Animator>().GetInteger("estado") != 3)
             {
-                spr2.transform.position += new Vector3(-0.09f, 0, 0);
+                GetComponent<Animator>().SetInteger("estado", 2);//cambio estado uno animacion walk
+
+                velocidad.y += vel_salto;
+                is_grounded = false;
+
+
+                if (!spr1.GetComponent<SpriteRenderer>().flipX)//si esta mirando a la derecha
+                {
+                    spr2.transform.position += new Vector3(-0.09f, 0, 0);
+                }
+
+                else
+                {
+                    spr2.transform.position += new Vector3(0.09f, 0, 0);
+
+                }
+
             }
 
-            else
+            else if (plataforma) /*si esta agachado voy a qquerer ver si esta en la plataforma para bajarlo*/
             {
-                spr2.transform.position += new Vector3(0.09f, 0, 0);
+                plataforma = false;
+                GetComponent<Animator>().SetInteger("estado", 2);
+                spr2.transform.position += new Vector3(0, -0.0911f, 0);
+                is_grounded = false;
+
+                if (!spr1.GetComponent<SpriteRenderer>().flipX)//si esta mirando a la derecha
+                {
+                    spr2.transform.position += new Vector3(-0.09f, 0, 0);
+                }
+
+                else
+                {
+                    spr2.transform.position += new Vector3(0.09f, 0, 0);
+
+                }
+
 
             }
-
-
         }
 
 
@@ -186,10 +233,23 @@ public class player_handler : MonoBehaviour
             Invoke("habilitar_cooldown", 0.5f);
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.P))/*TESTEAR MUERTE*/
+        {
+            muerte();
+        }
 
     }
+    }
 
+
+    void muerte()
+    {
+        GetComponent<Animator>().SetInteger("estado", 5);
+        transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 7);
+        estado_actual = estados.dead;
+        
+        Destroy(gameObject,2.0f);
+    }
 
     private void FixedUpdate()
     {
@@ -227,23 +287,24 @@ public class player_handler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Suelo") {
+        if (collision.gameObject.tag == "Suelo" || (collision.gameObject.tag == "Plataforma" && velocidad.y < 0))
+        {
 
-            if (!is_grounded) 
+            if (!is_grounded)
             {
                 is_grounded = true;
                 velocidad.y = 0;
 
-                if(velocidad.x !=0)
+                if (velocidad.x != 0)
                 {
                     GetComponent<Animator>().SetInteger("estado", 1);//cambio estado uno animacion walk
 
                 }
-                else 
+                else
                 {
                     GetComponent<Animator>().SetInteger("estado", 0);//cambio estado uno animacion walk
 
-
+                    transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 0);
                 }
 
 
@@ -262,13 +323,31 @@ public class player_handler : MonoBehaviour
 
                 }
 
+                if (collision.gameObject.tag == "Plataforma")
+                {
+                    plataforma = true;
+                }
+                else
+                {
+                    plataforma = false;
+                }
 
-
+                if(estado_actual == estados.dead)
+                {
+                    velocidad.x = 0;
+                }
 
             }
 
         }
 
+        else if (collision.gameObject.tag == "Plataforma" && velocidad.y > 0 && teclas[0] == true) 
+        {
+            GetComponent<Animator>().SetInteger("estado", 4);
+            transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 6);
+            velocidad.y += vel_salto * 1.1f;
+
+        }
 
 
     }

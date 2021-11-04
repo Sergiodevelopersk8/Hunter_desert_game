@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vel_desp: 0.8
-  vel_salto: 3.5
+  vel_salto: 3.6
   spr1: {fileID: 6222741814046974616}
   bala: {fileID: 3312341810403546466, guid: 3bb39d0b044f0c54e9f90e6299d72f5c, type: 3}
   spr2: {fileID: 6222741812623701333}

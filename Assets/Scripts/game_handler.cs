@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class game_handler : MonoBehaviour
 {
-
+ 
     public List<GameObject> indice_objetos;
     public List<GameObject> spawns;
     
