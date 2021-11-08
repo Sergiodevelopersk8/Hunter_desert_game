@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 7}
-  m_MinSize: {x: 950, y: 398}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 295
     height: 233
-  m_MinSize: {x: 102, y: 124}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -71,10 +71,10 @@ MonoBehaviour:
     y: 0
     width: 295
     height: 635
-  m_MinSize: {x: 277, y: 198}
-  m_MaxSize: {x: 4002, y: 8048}
+  m_MinSize: {x: 277, y: 174}
+  m_MaxSize: {x: 4002, y: 8024}
   vertical: 1
-  controlID: 87
+  controlID: 90
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 479, y: 348}
   m_MaxSize: {x: 8004, y: 8048}
   vertical: 0
-  controlID: 107
+  controlID: 89
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 348}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 108
+  controlID: 71
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -302,10 +302,10 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 54280000
-      m_LastClickedID: 0
-      m_ExpandedIDs: defbffff562b0000
+      scrollPos: {x: 0, y: 32}
+      m_SelectedIDs: 8ae6ffff
+      m_LastClickedID: -6518
+      m_ExpandedIDs: 0ef5ffff00fbffff4afbffffdefbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 10324
+  m_LastSelectedObjectID: 11080
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -477,19 +477,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Animations
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Animations
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\DrawH\Desktop\juego2d10c\hunter desert
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 3}
-    m_SelectedIDs: 782a0000
-    m_LastClickedID: 10872
+    scrollPos: {x: 0, y: 23}
+    m_SelectedIDs: aa280000
+    m_LastClickedID: 10410
     m_ExpandedIDs: 00000000ea270000aa2800009a2a0000f02a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -543,10 +543,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 54280000
-    m_LastClickedInstanceID: 10324
+    m_SelectedInstanceIDs: 0ef5ffff
+    m_LastClickedInstanceID: -2802
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300002e3e0000823300007a290000242f00007e290000602800008828000008280000
+    m_ExpandedInstanceIDs: c62300002e3e0000823300007a290000242f00007e2900006028000088280000082800001e2d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,9 +640,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.025344, y: 2.5504086, z: -0.6324617}
+    m_Target: {x: 559.06433, y: 236.69002, z: -3.9137595}
     speed: 2
-    m_Value: {x: 3.025344, y: 2.5504086, z: -0.6324617}
+    m_Value: {x: 559.06433, y: 236.69002, z: -3.9137595}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -674,9 +674,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.2083173
+    m_Target: 624.4497
     speed: 2
-    m_Value: 4.2083173
+    m_Value: 624.4497
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -736,7 +736,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
