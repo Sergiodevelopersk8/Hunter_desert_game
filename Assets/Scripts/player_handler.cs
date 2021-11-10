@@ -287,7 +287,7 @@ public class player_handler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Suelo" || (collision.gameObject.tag == "Plataforma" && velocidad.y < 0))
+        if (collision.gameObject.tag == "Suelo" || (collision.gameObject.tag =="Obstaculo" && velocidad.y < 0)|| (collision.gameObject.tag == "Plataforma" && velocidad.y < 0))
         {
 
             if (!is_grounded)
@@ -302,7 +302,7 @@ public class player_handler : MonoBehaviour
                 }
                 else
                 {
-                    GetComponent<Animator>().SetInteger("estado", 0);//cambio estado uno animacion walk
+                    GetComponent<Animator>().SetInteger("estado", 0);//cambio estado uno animacion idle
 
                     transform.Find("Spr_Billy").GetComponent<Animator>().SetInteger("estado", 0);
                 }
@@ -350,6 +350,44 @@ public class player_handler : MonoBehaviour
         }
 
 
+        if(collision.gameObject.tag == "Obstaculo")  //si coliciona con obstaculo
+        {
+
+            Debug.Log("colision con obstaculo");
+            velocidad.x = 0; //velocidad en x es 0
+            if (
+            GetComponent<Animator>().GetInteger("estado")==1) //SI estaba caminando
+            {
+                GetComponent<Animator>().SetInteger("estado", 0); //se pone en reposo
+
+            }
+        }
+
+    }
+
+
+    private void OnCollisionExit2D(Collision2D   collision) //al salir de  colision
+    {
+       if((collision.gameObject.tag == "Plataforma" || collision.gameObject.tag == "Obstaculo"  ) &&  velocidad.y <= 0)//chequea si el objeto del cual sali es una plataforma  u obstaculo y segun eso se habilita la caida
+
+        {
+            is_grounded = false;
+            GetComponent<Animator>().SetInteger("estado", 2); //estados callendo
+            if (!spr1.GetComponent<SpriteRenderer>().flipX)//si esta mirando a la derecha
+            {
+
+                spr2.transform.position += new Vector3(-0.09f, 0, 0);
+
+            }
+
+            else
+            {
+                spr2.transform.position += new Vector3(0.09f, 0, 0);
+
+
+
+            }
+        }
     }
 
 

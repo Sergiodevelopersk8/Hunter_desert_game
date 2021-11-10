@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\bala.cs" />
     <Compile Include="Assets\Scripts\camara_handler.cs" />
+    <Compile Include="Assets\Scripts\enemy1_handler.cs" />
     <Compile Include="Assets\Scripts\game_handler.cs" />
     <Compile Include="Assets\Scripts\level_handler.cs" />
     <Compile Include="Assets\Scripts\player_handler.cs" />
